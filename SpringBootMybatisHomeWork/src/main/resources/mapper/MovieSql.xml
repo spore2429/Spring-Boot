@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.model.mapper.MovieMapperInter">
+  <select id = "getMoiveTotalCount" resultType="int">
+	select count(*) from movie
+  </select>
+  <select id="getAllMovies" resultType="mvdto">
+  	select * from movie order by mv_opendate asc
+  </select>
+  <insert id="insertMovie" parameterType="mvdto">
+  	insert into movie (mv_title,mv_poster,mv_director,mv_opendate) values(#{mv_title},#{mv_poster},#{mv_director},#{mv_opendate})
+  </insert>
+  <select id="getMovieData" resultType="mvdto" parameterType="String">
+    select * from movie where mv_num=#{mv_num}
+  </select>
+  <update id="updateMovie" parameterType="mvdto">
+    update movie set mv_title=#{mv_title},mv_poster=#{mv_poster},mv_director=#{mv_director},mv_opendate=#{mv_opendate} where mv_num=#{mv_num}
+  </update>
+  <delete id="deleteMovie" parameterType="String">
+    delete from movie where mv_num=#{mv_num}
+  </delete>
+</mapper>

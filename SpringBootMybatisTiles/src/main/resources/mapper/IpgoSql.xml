@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.data.mapper.IpgoMapperInter">
+<select id="getTotalCount" resultType="int">
+	select count(*) from ipgo
+</select>
+
+<insert id="insertIpgo" parameterType="IpgoDto">
+    insert into ipgo (sangpum,price,photoname,ipgoday) values (#{sangpum},#{price},#{photoname},now())
+</insert>
+
+<!-- num의 max값,null일 경우 0 -->
+<select id="getMaxNum" resultType="int">
+	select ifnull(max(num),0) from ipgo
+</select>
+
+<select id="getAllIpgos" resultType="IpgoDto">
+	select * from ipgo order by ipgoday
+</select>
+
+<select id="getIpgoData" resultType="IpgoDto" parameterType="String">
+	select * from ipgo where num=#{num}
+</select>
+
+<update id="updateIpgo" parameterType="IpgoDto">
+	update ipgo set sangpum=#{sangpum},price=#{price},ipgoday=now() 
+<if test="photoname='no'">
+,photoname=#{photoname}
+</if>
+where num=#{num}
+</update>
+
+<delete id="deleteIpgo" parameterType="String">
+	delete from ipgo where num=#{num}
+</delete>
+</mapper>

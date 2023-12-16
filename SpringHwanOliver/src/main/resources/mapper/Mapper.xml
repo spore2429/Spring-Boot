@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.model.test.OliverInter">
+  	<select id="getAllBoso" resultType="bosodto" parameterType="String">
+  		select * from boso where company=#{company} order by step
+  	</select>
+  	<select id="getAllWasboso" resultType="wadto">
+  		select * from waboso order by idx desc
+  	</select>
+  	<insert id="insertBoso" parameterType="bosodto">
+  		insert into boso values(null,#{c_code},#{company},#{clevel},#{step})
+  	</insert>
+  	
+</mapper>
